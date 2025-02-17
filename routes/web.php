@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginGoogleController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishListController;
@@ -24,6 +28,22 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
+
+Route::post('/update-password', [AccountController::class, 'update_password'])->name('update_password');
+Route::get('/change-password', [AccountController::class, 'change_password'])->name('change_password');
+
+# login google 
+Route::controller(LoginGoogleController::class)->group(function(){
+    Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
+    Route::get('auth/google/callback', 'handleGoogleCallback');
+});
+
+# login facebook
+Route::controller(FacebookController::class)->group(function(){
+    Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
+    Route::get('auth/facebook/callback', 'handleFacebookCallback');
+});
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
@@ -72,9 +92,23 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/account-order/cancel-order', [UserController::class, 'order_cancel'])->name('user.order.cancel');
 
     // Email 
+    Route::get('/send-email', [MailController::class, 'sendEmail'])->name('user.email');
 
-    Route::get('/send-email', [MailController::class, 'sendEmail'])->name('home.email');
+
+    //VNPay
+    // Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('user.vnpay_payment');
+    
+    Route::post('checkout/payVnpay', [PaymentController::class, 'payVnpay'])->name('checkoutVnpay');
+    Route::post('checkout/Momo', [PaymentController::class, 'payVnpay'])->name('checkoutmomo');
+
+    
 });
+
+Route::get('/forgot-password', [MailController::class, 'forgotpassword'])->name('user.forgotpassword');
+Route::post('/forgot-password', [MailController::class, 'PostForgotPassword'])->name('user.PostForgotPassword');
+Route::get('/reset-password/{token}', [MailController::class, 'mail'])->name('user.mail');
+Route::post('/reset-password/{token}', [MailController::class, 'PostMail'])->name('user.postmail');
+
 
 
 Route::middleware(['auth', AuthAdmin::class])->group(function () {

@@ -7,6 +7,7 @@ use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Transaction;
+use App\Models\Vnpay;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -96,6 +97,8 @@ class CartController extends Controller
         $discount = $coupon['type'] == 'fixed' ? $coupon['value'] : ($subtotal * $coupon['value']) / 100;
 
         $subtotalAfterDiscount = $subtotal - $discount;
+        
+        // Vat 10%
         $taxAfterDiscount = ($subtotalAfterDiscount * config('cart.tax')) / 100;
         $totalAfterDiscount = $subtotalAfterDiscount + $taxAfterDiscount;
 
@@ -121,6 +124,7 @@ class CartController extends Controller
         }
 
         $address = Address::where('user_id', Auth::user()->id)->where('isdefault', 1)->first();
+
         return view('checkout', compact('address'));
     }
 
@@ -190,7 +194,27 @@ class CartController extends Controller
         if ($request->mode == "card") {
             //
         } else if ($request->mode == "paypal") {
-            //
+            // if (isset($vnpayData['vnp_ResponseCode']) && $vnpayData['vnp_ResponseCode'] == '00') {
+            //     // Lưu thông tin giao dịch vào cơ sở dữ liệu
+            //     $transaction = new Vnpay();
+            //     $transaction->user_id = $vnpayData['id']; // ID người dùng
+            //     $transaction->amount = $vnpayData['vnp_Amount'] / 100; // Số tiền (VNPAY gửi về là cent)
+            //     $transaction->transaction_id = $vnpayData['vnp_TransactionNo']; // Mã giao dịch từ VNPAY
+            //     $transaction->vnp_BankCode = $vnpayData['vnp_BankCode']; // Mã ngân hàng
+            //     $transaction->vnp_BankTranNo = $vnpayData['vnp_BankTranNo']; // Số giao dịch ngân hàng
+            //     $transaction->vnp_CardType = $vnpayData['vnp_CardType']; // Loại thẻ
+            //     $transaction->vnp_OrderInfo = $vnpayData['vnp_OrderInfo']; // Thông tin đơn hàng
+            //     $transaction->vnp_PayDate = $vnpayData['vnp_PayDate']; // Ngày thanh toán
+            //     $transaction->vnp_ResponseCode = $vnpayData['vnp_ResponseCode']; // Mã phản hồi
+            //     $transaction->vnp_TmnCode = $vnpayData['vnp_TmnCode']; // Mã TMN
+            //     $transaction->vnp_TransactionStatus = $vnpayData['vnp_TransactionStatus']; // Trạng thái giao dịch
+            //     $transaction->vnp_TxnRef = $vnpayData['vnp_TxnRef']; // Tham chiếu giao dịch
+            //     $transaction->vnp_SecureHash = $vnpayData['vnp_SecureHash']; // Mã băm an toàn
+            //     $transaction->save();
+    
+            //     return response()->json(['message' => 'Transaction successful'], 200);
+            // }
+        
         } else if ($request->mode == "cod") {
             $transaction = new Transaction();
             $transaction->user_id = $user_id;

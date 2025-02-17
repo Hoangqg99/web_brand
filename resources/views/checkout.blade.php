@@ -167,7 +167,7 @@
                         @endif
                     </div>
                     <div class="checkout__totals-wrapper">
-                        <form method="POST" action="{{ route('home.email') }}">
+                        <form method="POST" action="{{ route('user.email') }}">
                             @csrf
                             <div class="sticky-content">
                                 <div class="checkout__totals">
@@ -240,7 +240,10 @@
                                                 </tr>
                                                 <tr>
                                                     <th>TOTAL</th>
-                                                    <td class="text-right">${{ Cart::instance('cart')->total() }}</td>
+                                                    {{-- <td class="text-right">${{ Cart::instance('cart')->total() }}</td> --}}
+                                                    <td class="text-right">
+                                                        {{ number_format(Cart::instance('cart')->total(), 0, '', '.') }}.000
+                                                        VND</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -253,20 +256,20 @@
                                         id="mode1" value="card">
                                     <label class="form-check-label" for="mode1">
                                         Debit or Credit Card
-
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input form-check-input_fill" type="radio" name="mode"
-                                        id="mode2" value="paypal">
-                                    <label class="form-check-label" for="mode2">
-                                        Paypal
-
                                     </label>
                                 </div> --}}
+
+                                    {{-- <div class="form-check">
+                                        <input class="form-check-input form-check-input_fill" type="radio"
+                                            name="mode" id="mode2" value="paypal">
+                                        <label class="form-check-label" for="mode2">
+                                            Paypal
+                                        </label>
+                                    </div> --}}
+
                                     <div class="form-check">
                                         <input class="form-check-input form-check-input_fill" type="radio"
-                                            name="mode" id="mode3" value="cod">
+                                            name="mode" id="mode3" value="cod" onclick="email()">
                                         <label class="form-check-label" for="mode3">
                                             Cash on delivery
                                         </label>
@@ -286,6 +289,32 @@
                     </div>
                 </div>
             </form>
+            <br>
+
+            <div class="checkout__totals-wrapper"
+                style="text-align: right; display: flex; justify-content: space-between; padding-left: 990px;">
+                <form method="POST" action="{{ route('checkoutVnpay') }}"
+                    style="margin-right: 10px; border-block: 12px">
+                    @csrf
+                    <button type="submit" name="redirect" class="btn btn-success"> Vnpay</button>
+                </form>
+                <form method="POST" action="{{ route('checkoutmomo') }}">
+                    @csrf
+                    <button type="submit" name="payUrl" class="btn btn-danger"> Momo</button>
+                </form>
+            </div>
+
         </section>
     </main>
+
+    <form action="{{ route('user.email') }}" id="email-form" method="GET">
+        @csrf
+        <input type="hidden" id="email" name="email">
+    </form>
+
+    <script>
+        function email() {
+            $('#email-form').submit();
+        }
+    </script>
 @endsection

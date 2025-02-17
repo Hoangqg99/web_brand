@@ -54,7 +54,11 @@
         <div class="container mw-1620 bg-white border-radius-10">
             <div class="mb-3 mb-xl-5 pt-1 pb-4"></div>
             <section class="category-carousel container">
-                <h2 class="section-title text-center mb-3 pb-xl-2 mb-xl-4">You Might Like</h2>
+                {{-- <h2 class="section-title text-center mb-3 pb-xl-2 mb-xl-4">You Might Like</h2> --}}
+                <div class="title-section mb-5">
+                    <h2 class="text-uppercase"><span class="d-block">You</span>Might Like</h2>
+                </div>
+
 
                 <div class="position-relative">
                     <div class="swiper-container js-swiper-slider"
@@ -129,7 +133,10 @@
             <div class="mb-3 mb-xl-5 pt-1 pb-4"></div>
 
             <section class="hot-deals container">
-                <h2 class="section-title text-center mb-3 pb-xl-3 mb-xl-4">Hot Deals</h2>
+                {{-- <h2 class="section-title text-center mb-3 pb-xl-3 mb-xl-4">Hot Deals</h2> --}}
+                <div class="title-section mb-5">
+                    <h2 class="text-uppercase"><span class="d-block">Hot</span>Deals</h2>
+                </div>
                 <div class="row">
                     <div
                         class="col-md-6 col-lg-4 col-xl-20per d-flex align-items-center flex-column justify-content-center py-4 align-items-md-start">
@@ -237,7 +244,8 @@
 
             <div class="mb-3 mb-xl-5 pt-1 pb-4"></div>
 
-            <section class="category-banner container">
+
+            {{-- <section class="category-banner container">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="category-banner__item border-radius-10 mb-5">
@@ -268,12 +276,77 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> --}}
 
-            <div class="mb-3 mb-xl-5 pt-1 pb-4"></div>
+            <div class="site-section">
+                <div class="container">
+                    <div class="title-section mb-5">
+                        <h2 class="text-uppercase"><span class="d-block">Discover</span> The Collections</h2>
+                    </div>
+                    <div class="row align-items-stretch">
+                        <div class="col-lg-8">
+                            <div class="product-item sm-height full-height bg-gray">
+                                <a href="{{ route('shop.index') }}" class="product-category">Women <span></span></a>
+                                <img src="{{ asset('smax/images/model_4.png') }}" alt="Image" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="product-item sm-height bg-gray mb-4">
+                                <a href="{{ route('shop.index') }}" class="product-category">Men <span></span></a>
+                                <img src="{{ asset('smax/images/model_5.png') }}" alt="Image" class="img-fluid">
+                            </div>
+
+                            <div class="product-item sm-height bg-gray">
+                                <a href="{{ route('shop.index') }}" class="product-category">Shoes <span></span></a>
+                                <img src="{{ asset('smax/images/model_6.png') }}" alt="Image" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="mb-3 mb-xl-5 pt-1 pb-4">
+                <div class="title-section mb-5">
+
+                    <section class="collection bg-light position-relative py-5">
+                        <div class="container">
+                            <div class="row">
+                                <div class="title-xlarge text-uppercase txt-fx domino">Collection</div>
+                                <div class="collection-item d-flex flex-wrap my-5">
+                                    <div class="col-md-6 column-container">
+                                        <div class="image-holder">
+                                            <img src="images/single-image-2.jpg" alt="collection"
+                                                class="product-image img-fluid">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 column-container bg-white">
+                                        <div class="collection-content p-5 m-0 m-md-5">
+                                            <h3 class="element-title text-uppercase">Classic winter collection</h3>
+                                            <p>Dignissim lacus, turpis ut suspendisse vel tellus. Turpis purus, gravida
+                                                orci, fringilla a. Ac sed eu
+                                                fringilla odio mi. Consequat pharetra at magna imperdiet cursus ac faucibus
+                                                sit libero. Ultricies quam
+                                                nunc, lorem sit lorem urna, pretium aliquam ut. In vel, quis donec dolor id
+                                                in. Pulvinar commodo mollis
+                                                diam sed facilisis at cursus imperdiet cursus ac faucibus sit faucibus sit
+                                                libero.</p>
+                                            <a href="#" class="btn btn-dark text-uppercase mt-3">Shop Collection</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
 
             <section class="products-grid container">
-                <h2 class="section-title text-center mb-3 pb-xl-3 mb-xl-4">Featured Products</h2>
+                {{-- <h2 class="section-title text-center mb-3 pb-xl-3 mb-xl-4">Featured Products</h2> --}}
+                <div class="title-section mb-5">
+                    <h2 class="text-uppercase"><span class="d-block">Featured</span>Products</h2>
+                </div>
 
                 <div class="row">
                     @foreach ($fproducts as $fproduct)
@@ -290,28 +363,45 @@
                                             href="{{ route('shop.product.details', ['product_slug' => $fproduct->slug]) }}">{{ $fproduct->name }}</a>
                                     </h6 <div class="product-card__price d-flex align-items-center">
                                     <span class="money price text-secondary">
-                                        @if ($sproduct->sale_price)
-                                            <s>${{ $sproduct->regular_price }}</s>
-                                            ${{ $sproduct->sale_price }}
+                                        @if ($fproduct->sale_price)
+                                            <s>${{ $fproduct->regular_price }}</s>
+                                            ${{ $fproduct->sale_price }}
                                         @else
-                                            ${{ $sproduct->regular_price }}
+                                            ${{ $fproduct->regular_price }}
                                         @endif
                                     </span>
                                 </div>
                             </div>
                         </div>
-                </div>
-                @endforeach
-        </div><!-- /.row -->
+                    @endforeach
+                </div><!-- /.row -->
 
-        <div class="text-center mt-2">
+                {{-- <div class="text-center mt-2">
             <a class="btn-link btn-link_lg default-underline text-uppercase fw-medium" href="#">Load
                 More</a>
-        </div>
-        </section>
+        </div> --}}
+            </section>
         </div>
 
-        <div class="mb-3 mb-xl-5 pt-1 pb-4"></div>
+        <div class="mb-3 mb-xl-5 pt-1 pb-4">
+            <div class="site-blocks-cover inner-page py-5" data-aos="fade">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 ml-auto order-md-2 align-self-start">
+                            <div class="site-block-cover-content">
+                                <h2 class="sub-title">#New Summer Collection 2019</h2>
+                                <h1>New Shoes</h1>
+                                <p><a href="{{ route('shop.index') }}" class="btn btn-black rounded-0"
+                                        data-turbolinks="false">Shop Now</a></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 order-1 align-self-end">
+                            <img src="{{ asset('smax/images/model_6.png') }}" alt="Image" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
 @endsection

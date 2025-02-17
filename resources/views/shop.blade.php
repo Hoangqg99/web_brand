@@ -526,16 +526,14 @@
             </div>
         </section>
     </main>
-    <form id="frmfilter" method="GET" action="{{ route('shop.index') }}" />
-    <input type="hidden" name="page" value="{{ $products->currentPage() }}" />
-    <input type="hidden" name="size" id="size" value="{{ $size }}" />
-    <input type="hidden" name="order" id="order" value="{{ $order }}" />
-    <input type="hidden" name="brands" id="hdnBrands" />
-    <input type="hidden" name="categories" id="hdnCategories" />
-    <input type="hidden" name="min" id="hdnMinPrice" value="{{ $min_price }}" />
-    <input type="hidden" name="max" id="hdnMaxPrice" value="{{ $max_price }}" />
-
-
+    <form id="frmfilter" method="GET" action="{{ route('shop.index') }}">
+        <input type="hidden" name="page" value="{{ $products->currentPage() }}" />
+        <input type="hidden" name="size" id="size" value="{{ $size }}" />
+        <input type="hidden" name="order" id="order" value="{{ $order }}" />
+        <input type="hidden" name="brands" id="hdnBrands" />
+        <input type="hidden" name="categories" id="hdnCategories" />
+        <input type="hidden" name="min" id="hdnMinPrice" value="{{ $min_price }}" />
+        <input type="hidden" name="max" id="hdnMaxPrice" value="{{ $max_price }}" />
     </form>
 @endsection
 

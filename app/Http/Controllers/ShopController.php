@@ -56,7 +56,7 @@ class ShopController extends Controller
             })
             ->orderBy($o_column, $o_order)
             ->paginate($size);
-
+            
         return view('shop', compact('products', 'size', 'order', 'brands', 'f_brands', 'categories', 'f_categories', 'min_price', 'max_price'));
     }
 

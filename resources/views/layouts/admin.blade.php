@@ -24,8 +24,44 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
 
+
+    {{-- -- --}}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
+    <link rel="stylesheet" href="{{ asset('shop/fonts/icomoon/style.css') }}">
+    {{-- <link rel="stylesheet" href="fonts/icomoon/style.css"> --}}
+
+    {{-- <link rel="stylesheet" href="css/bootstrap.min.css"> --}}
+    <link rel="stylesheet" href="{{ asset('shop/css/bootstrap.min.css">') }}">
+
+    {{-- <link rel="stylesheet" href="css/magnific-popup.css"> --}}
+    <link rel="stylesheet" href="{{ asset('shop/css/magnific-popup.css') }}">
+
+    {{-- <link rel="stylesheet" href="css/jquery-ui.css"> --}}
+    <link rel="stylesheet" href="{{ asset('shop/css/jquery-ui.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('shop/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
+
+
+    <link rel="stylesheet" href="{{ asset('shop/css/aos.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('shop/css/style.css') }}">
+    {{-- --     --}}
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+
+
     @stack('styles')
 </head>
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+</style>
+
+
 
 
 <body class="body">
@@ -34,12 +70,13 @@
             <div class="layout-wrap">
                 <div class="section-menu-left">
                     <div class="box-logo">
-                        <a href="{{ route('admin.index') }}" id="site-logo-inner">
-                            <img class="" id="logo_header_1" alt=""
-                                src="{{ asset('images/logo/logo.png') }}"
-                                data-light="{{ asset('images/logo/logo.png') }}"
+                        <div class="site-logo">
+                            <a href="{{ route('admin.index') }}" id="site-logo-inner" class="js-logo-clone"
                                 data-dark="{{ asset('images/logo/logo.png') }}">
-                        </a>
+                                <h3>Dashboard</h3>
+                            </a>
+                        </div>
+
                         <div class="button-show-hide">
                             <i class="icon-menu-left"></i>
                         </div>
@@ -47,6 +84,14 @@
                     <div class="center">
                         <div class="center-item">
                             <div class="center-heading">Main Home</div>
+                            <ul class="menu-list">
+                                <li class="menu-item">
+                                    <a href="{{ route('home.index') }}" class="">
+                                        <div class="icon"><i class="icon-home"></i></div>
+                                        <div class="text">Home Shop</div>
+                                    </a>
+                                </li>
+                            </ul>
                             <ul class="menu-list">
                                 <li class="menu-item">
                                     <a href="{{ route('admin.index') }}" class="">
@@ -58,73 +103,30 @@
                         </div>
                         <div class="center-item">
                             <ul class="menu-list">
-                                <li class="menu-item has-children">
+                                <li class="menu-item">
                                     <a href="{{ route('admin.products') }}" class="menu-item-button">
                                         <div class="icon"><i class="icon-shopping-cart"></i></div>
                                         <div class="text">Products</div>
                                     </a>
-                                    {{-- <ul class="sub-menu">
-                                        <li class="sub-menu-item">
-                                            <a href="{{ route('admin.product.add') }}" class="">
-                                                <div class="text">Add Product</div>
-                                            </a>
-                                        </li>
-                                        <li class="sub-menu-item">
-                                            <a href="{{ route('admin.products') }}" class="">
-                                                <div class="text">Products</div>
-                                            </a>
-                                        </li>
-                                    </ul> --}}
                                 </li>
-                                <li class="menu-item has-children">
+                                <li class="menu-item">
                                     <a href="{{ route('admin.brands') }}" class="menu-item-button">
                                         <div class="icon"><i class="icon-layers"></i></div>
                                         <div class="text">Brand</div>
                                     </a>
-                                    {{-- <ul class="sub-menu">
-                                        <li class="sub-menu-item">
-                                            <a href="{{ route('admin.brand.add') }}" class="">
-                                                <div class="text">New Brand</div>
-                                            </a>
-                                        </li>
-                                        <li class="sub-menu-item">
-                                            <a href="{{ route('admin.brands') }}" class="">
-                                                <div class="text">Brands</div>
-                                            </a>
-                                        </li>
-                                    </ul> --}}
                                 </li>
-                                <li class="menu-item has-children">
+                                <li class="menu-item">
                                     <a href="{{ route('admin.categories') }}" class="menu-item-button">
                                         <div class="icon"><i class="icon-layers"></i></div>
                                         <div class="text">Category</div>
                                     </a>
-                                    {{-- <ul class="sub-menu">
-                                        <li class="sub-menu-item">
-                                            <a href="{{ route('admin.category.add') }}" class="">
-                                                <div class="text">New Category</div>
-                                            </a>
-                                        </li>
-                                        <li class="sub-menu-item">
-                                            <a href="{{ route('admin.categories') }}" class="">
-                                                <div class="text">Categories</div>
-                                            </a>
-                                        </li>
-                                    </ul> --}}
                                 </li>
 
-                                <li class="menu-item has-children">
+                                <li class="menu-item">
                                     <a href="{{ route('admin.orders') }}" class="menu-item-button">
                                         <div class="icon"><i class="icon-file-plus"></i></div>
                                         <div class="text">Order</div>
                                     </a>
-                                    {{-- <ul class="sub-menu">
-                                        <li class="sub-menu-item">
-                                            <a href="{{ route('admin.orders') }}" class="">
-                                                <div class="text">Orders</div>
-                                            </a>
-                                        </li>
-                                    </ul> --}}
                                 </li>
                                 <li class="menu-item">
                                     <a href="{{ route('admin.slides') }}" class="">
@@ -152,13 +154,6 @@
                                         <div class="text">User</div>
                                     </a>
                                 </li>
-
-                                {{-- <li class="menu-item">
-                                    <a href="settings.html" class="">
-                                        <div class="icon"><i class="icon-settings"></i></div>
-                                        <div class="text">Settings</div>
-                                    </a>
-                                </li> --}}
 
                                 <li class="menu-item">
                                     <form method="POST" id="logout-form" action="{{ route('logout') }}">
@@ -287,9 +282,8 @@
                                                     <img src="{{ asset('images/avatar/user-1.') }}png"
                                                         alt="">
                                                 </span>
-                                                <span class="flex flex-column">
-                                                    <span class="body-title mb-2">Kristin Watson</span>
-                                                    <span class="text-tiny">Admin</span>
+                                                <span class="flex flex-col">
+                                                    <span class="body-title mb-2">{{ Auth::user()->name }}</span>
                                                 </span>
                                             </span>
                                         </button>
@@ -347,7 +341,7 @@
                         @yield('content')
 
                         <div class="bottom-page">
-                            <div class="body-text">Copyright © 2024 SurfsideMedia</div>
+                            <div class="body-text">Copyright © 2024 shop max</div>
                         </div>
                     </div>
 
@@ -363,6 +357,7 @@
     <script src="{{ asset('js/apexcharts/apexcharts.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <script>
+        // ajax seach 
         $(function() {
             $("#search-input").on("keyup", function() {
                 var searchQuery = $(this).val();
